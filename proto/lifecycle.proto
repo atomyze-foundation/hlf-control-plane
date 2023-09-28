@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "github.com/atomyze-foundation/hlf-control-plane/proto";
+
+message LifecycleChaincode {
+  string name = 1;
+  int64 sequence = 2;
+  string version = 3;
+  bool init_required = 4;
+}
+
+message LifecycleStatusRequest {
+  string channel_name = 1;
+}
+
+message LifecycleStatusResponse {
+  repeated LifecycleChaincode chaincodes = 1;
+}
+
+message LifecycleFullRequest {
+  string channel_name = 1;
+  string chaincode_name = 2;
+  string chaincode_label = 3;
+  string policy = 4;
+  string version = 5;
+  repeated string init_args = 6;
+  bool init_required = 7;
+  bool commit_force = 8;
+}
+
+message LifecycleFullResponse {
+  bool committed = 1;
+  map<string, bool> approvals = 2;
+}
+
+message LifecycleApprovedRequest {
+  string channel_name = 1;
+  string chaincode_name = 2;
+}
+
+message LifecycleApprovedResponse {
+  LifecycleChaincode chaincode = 1;
+  string package_id = 2;
+}
+
+message LifecycleCheckCommitReadinessRequest {
+  int64 sequence = 1;
+  string channel_name = 2;
+  string chaincode_name = 3;
+  string policy = 4;
+  string version = 5;
+  bool init_required = 6;
+}
+
+message LifecycleCheckCommitReadinessResponse {
+  map<string, bool> approvals = 2;
+}
+
+message LifecycleApproveForMyOrgRequest {
+  int64 sequence = 1;
+  string channel_name = 2;
+  string chaincode_name = 3;
+  string chaincode_label = 4;
+  string policy = 5;
+  string version = 6;
+  bool init_required = 7;
+}
+
+message LifecycleCommitRequest {
+  int64 sequence = 1;
+  string channel_name = 2;
+  string chaincode_name = 3;
+  string policy = 4;
+  string version = 5;
+  bool init_required = 6;
+}
+
+message LifecycleInitRequest {
+  string channel_name = 1;
+  string chaincode_name = 2;
+  repeated string init_args = 3;
+}

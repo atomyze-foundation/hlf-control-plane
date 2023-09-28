@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "github.com/atomyze-foundation/hlf-control-plane/proto";
+
+import "common.proto";
+
+message ChannelJoinedResponse {
+  message Result {
+    string name = 1;
+    repeated PeerResult peers = 2;
+  }
+
+  message PeerResult {
+    string peer = 1;
+    uint64 block_number = 2;
+    bytes block_hash = 3;
+    bytes prev_block_hash = 4;
+  }
+
+  repeated Result result = 1;
+}
+
+// Request and response for channel join method
+message ChannelJoinRequest {
+  message Orderer {
+    string host = 1;
+    uint32 port = 2;
+  }
+  string channel_name = 1;
+  Orderer orderer = 2;
+}
+
+message ChannelJoinResponse {
+  message PeerResult {
+    string peer = 1;
+    oneof result {
+      bool existed = 2;
+      string err = 3;
+    }
+  }
+
+  repeated PeerResult result = 1;
+}
