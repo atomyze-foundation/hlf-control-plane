@@ -1,0 +1,1742 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Hlf Control Plane",
+    "version": "1.0",
+    "license": {
+      "name": "[Default license](LICENSE)"
+    }
+  },
+  "tags": [
+    {
+      "name": "ChaincodeService"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/chaincode/install": {
+      "post": {
+        "summary": "Installation of chaincode package",
+        "operationId": "chaincodeInstall",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoChaincodeInstallResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Request for downloading and installation of chaincodes",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoChaincodeInstallRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Chaincode"
+        ]
+      }
+    },
+    "/v1/chaincode/install-external": {
+      "post": {
+        "summary": "Installation of external chaincode package",
+        "operationId": "chaincodeInstallExternal",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoChaincodeInstallResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoChaincodeInstallExternalRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Chaincode"
+        ]
+      }
+    },
+    "/v1/chaincode/installed": {
+      "get": {
+        "summary": "Get list of installed chaincodes",
+        "operationId": "chaincodeInstalledList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoChaincodeInstalledResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Chaincode"
+        ]
+      }
+    },
+    "/v1/channel/join": {
+      "post": {
+        "summary": "Join channel by fetching genesis block from orderer",
+        "operationId": "channelJoin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoChannelJoinResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoChannelJoinRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Channels"
+        ]
+      }
+    },
+    "/v1/channel/joined": {
+      "get": {
+        "summary": "Get list of joined channels",
+        "operationId": "channelsList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoChannelJoinedResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Channels"
+        ]
+      }
+    },
+    "/v1/config/{channelName}/anchor": {
+      "get": {
+        "summary": "Get list of anchor peers on channel",
+        "operationId": "anchorPeerList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoConfigAnchorListResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "channelName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Configuration"
+        ]
+      },
+      "put": {
+        "summary": "Modify list of anchor peers on channel",
+        "operationId": "anchorPeerModify",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoConfigAnchorModifyResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "channelName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "orderer": {
+                  "$ref": "#/definitions/protoOrderer"
+                },
+                "peers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/definitions/protosAnchorPeer"
+                  }
+                }
+              },
+              "description": "Configuration anchor list request",
+              "title": "ConfigAnchorModifyRequest",
+              "required": [
+                "peers"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "Configuration"
+        ]
+      }
+    },
+    "/v1/config/{channelName}/ordering": {
+      "get": {
+        "summary": "Get ordering config of specified channel",
+        "operationId": "orderingGetConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoConfigOrderingListResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "channelName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Configuration"
+        ]
+      },
+      "delete": {
+        "summary": "Delete orderer from channel",
+        "operationId": "orderingConfigDelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "channelName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "orderer": {
+                  "$ref": "#/definitions/protoOrderer"
+                }
+              },
+              "title": "Request and response for ordering deletion method"
+            }
+          }
+        ],
+        "tags": [
+          "Configuration"
+        ]
+      },
+      "post": {
+        "summary": "Add new orderer in channel",
+        "operationId": "orderingConfigAdd",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "channelName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "orderer": {
+                  "$ref": "#/definitions/protoOrderer"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Configuration"
+        ]
+      },
+      "put": {
+        "summary": "Update current orderer in channel",
+        "operationId": "orderingConfigUpdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "channelName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "orderer": {
+                  "$ref": "#/definitions/protoOrderer"
+                }
+              },
+              "title": "Request and response for ordering modify method"
+            }
+          }
+        ],
+        "tags": [
+          "Configuration"
+        ]
+      }
+    },
+    "/v1/discovery/{channelName}/config": {
+      "post": {
+        "summary": "Get config of channel",
+        "operationId": "discoveryConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoDiscoveryConfigResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "channelName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "tags": [
+          "Discovery"
+        ]
+      }
+    },
+    "/v1/discovery/{channelName}/endorsers": {
+      "post": {
+        "summary": "Get current endorsers of chaincode on channel",
+        "operationId": "discoveryEndorsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoDiscoveryEndorsersResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "channelName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "chaincodeName": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Discovery"
+        ]
+      }
+    },
+    "/v1/discovery/{channelName}/peers": {
+      "post": {
+        "summary": "Get current peers of channel",
+        "operationId": "discoveryPeers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoDiscoveryPeersResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "channelName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "tags": [
+          "Discovery"
+        ]
+      }
+    },
+    "/v1/lifecycle/approve-for-my-org": {
+      "post": {
+        "summary": "Approve for my org chaincode on channel",
+        "operationId": "lifecycleApproveForMyOrg",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoLifecycleApproveForMyOrgRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Lifecycle"
+        ]
+      }
+    },
+    "/v1/lifecycle/check-commit-readiness": {
+      "post": {
+        "summary": "Get a map of orgs to their approval (true/false) for the definition supplied as args of certain chaincode on channel",
+        "operationId": "lifecycleCheckCommitReadiness",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoLifecycleCheckCommitReadinessResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoLifecycleCheckCommitReadinessRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Lifecycle"
+        ]
+      }
+    },
+    "/v1/lifecycle/commit": {
+      "post": {
+        "summary": "Commit for chaincode on channel",
+        "operationId": "lifecycleCommit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoLifecycleCommitRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Lifecycle"
+        ]
+      }
+    },
+    "/v1/lifecycle/full": {
+      "post": {
+        "summary": "Approve and commit chaincode on channel",
+        "operationId": "lifecycleFull",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoLifecycleFullResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoLifecycleFullRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Lifecycle"
+        ]
+      }
+    },
+    "/v1/lifecycle/init": {
+      "post": {
+        "summary": "Init for chaincode on channel",
+        "operationId": "lifecycleInit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoLifecycleInitRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Lifecycle"
+        ]
+      }
+    },
+    "/v1/lifecycle/{channelName}": {
+      "get": {
+        "summary": "Get current committed chaincodes on channel",
+        "operationId": "lifecycleStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoLifecycleStatusResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "channelName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Lifecycle"
+        ]
+      }
+    },
+    "/v1/lifecycle/{channelName}/approved/{chaincodeName}": {
+      "get": {
+        "summary": "Get current approved definition of certain chaincode on channel",
+        "operationId": "lifecycleApproved",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoLifecycleApprovedResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/protoErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "channelName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chaincodeName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Lifecycle"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "DiscoveryPeerCertificate": {
+      "type": "object",
+      "properties": {
+        "raw": {
+          "type": "string"
+        },
+        "ski": {
+          "type": "string"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dateExpire": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "discoveryConfigResult": {
+      "type": "object",
+      "properties": {
+        "msps": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/mspFabricMSPConfig"
+          },
+          "title": "msps is a map from MSP_ID to FabricMSPConfig"
+        },
+        "orderers": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/discoveryEndpoints"
+          },
+          "title": "orderers is a map from MSP_ID to endpoint lists of orderers"
+        }
+      }
+    },
+    "discoveryEndpoint": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Endpoint is a combination of a host and a port"
+    },
+    "discoveryEndpoints": {
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/discoveryEndpoint"
+          }
+        }
+      },
+      "title": "Endpoints is a list of Endpoint(s)"
+    },
+    "mspFabricCryptoConfig": {
+      "type": "object",
+      "properties": {
+        "signatureHashFamily": {
+          "type": "string",
+          "description": "SignatureHashFamily is a string representing the hash family to be used\nduring sign and verify operations.\nAllowed values are \"SHA2\" and \"SHA3\"."
+        },
+        "identityIdentifierHashFunction": {
+          "type": "string",
+          "description": "IdentityIdentifierHashFunction is a string representing the hash function\nto be used during the computation of the identity identifier of an MSP identity.\nAllowed values are \"SHA256\", \"SHA384\" and \"SHA3_256\", \"SHA3_384\"."
+        }
+      },
+      "title": "FabricCryptoConfig contains configuration parameters\nfor the cryptographic algorithms used by the MSP\nthis configuration refers to"
+    },
+    "mspFabricMSPConfig": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name holds the identifier of the MSP; MSP identifier\nis chosen by the application that governs this MSP.\nFor example, and assuming the default implementation of MSP,\nthat is X.509-based and considers a single Issuer,\nthis can refer to the Subject OU field or the Issuer OU field."
+        },
+        "rootCerts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          },
+          "title": "List of root certificates trusted by this MSP\nthey are used upon certificate validation (see\ncomment for IntermediateCerts below)"
+        },
+        "intermediateCerts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          },
+          "title": "List of intermediate certificates trusted by this MSP;\nthey are used upon certificate validation as follows:\nvalidation attempts to build a path from the certificate\nto be validated (which is at one end of the path) and\none of the certs in the RootCerts field (which is at\nthe other end of the path). If the path is longer than\n2, certificates in the middle are searched within the\nIntermediateCerts pool"
+        },
+        "admins": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          },
+          "title": "Identity denoting the administrator of this MSP"
+        },
+        "revocationList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          },
+          "title": "Identity revocation list"
+        },
+        "signingIdentity": {
+          "$ref": "#/definitions/mspSigningIdentityInfo",
+          "title": "SigningIdentity holds information on the signing identity\nthis peer is to use, and which is to be imported by the\nMSP defined before"
+        },
+        "organizationalUnitIdentifiers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/mspFabricOUIdentifier"
+          },
+          "title": "OrganizationalUnitIdentifiers holds one or more\nfabric organizational unit identifiers that belong to\nthis MSP configuration"
+        },
+        "cryptoConfig": {
+          "$ref": "#/definitions/mspFabricCryptoConfig",
+          "title": "FabricCryptoConfig contains the configuration parameters\nfor the cryptographic algorithms used by this MSP"
+        },
+        "tlsRootCerts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          },
+          "description": "List of TLS root certificates trusted by this MSP.\nThey are returned by GetTLSRootCerts."
+        },
+        "tlsIntermediateCerts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          },
+          "description": "List of TLS intermediate certificates trusted by this MSP;\nThey are returned by GetTLSIntermediateCerts."
+        },
+        "fabricNodeOus": {
+          "$ref": "#/definitions/mspFabricNodeOUs",
+          "description": "fabric_node_ous contains the configuration to distinguish clients from peers from orderers\nbased on the OUs."
+        }
+      },
+      "description": "FabricMSPConfig collects all the configuration information for\na Fabric MSP.\nHere we assume a default certificate validation policy, where\nany certificate signed by any of the listed rootCA certs would\nbe considered as valid under this MSP.\nThis MSP may or may not come with a signing identity. If it does,\nit can also issue signing identities. If it does not, it can only\nbe used to validate and verify certificates."
+    },
+    "mspFabricNodeOUs": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "If true then an msp identity that does not contain any of the specified OU will be considered invalid."
+        },
+        "clientOuIdentifier": {
+          "$ref": "#/definitions/mspFabricOUIdentifier",
+          "title": "OU Identifier of the clients"
+        },
+        "peerOuIdentifier": {
+          "$ref": "#/definitions/mspFabricOUIdentifier",
+          "title": "OU Identifier of the peers"
+        },
+        "adminOuIdentifier": {
+          "$ref": "#/definitions/mspFabricOUIdentifier",
+          "title": "OU Identifier of the admins"
+        },
+        "ordererOuIdentifier": {
+          "$ref": "#/definitions/mspFabricOUIdentifier",
+          "title": "OU Identifier of the orderers"
+        }
+      },
+      "description": "FabricNodeOUs contains configuration to tell apart clients from peers from orderers\nbased on OUs. If NodeOUs recognition is enabled then an msp identity\nthat does not contain any of the specified OU will be considered invalid."
+    },
+    "mspFabricOUIdentifier": {
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "format": "byte",
+          "title": "Certificate represents the second certificate in a certification chain.\n(Notice that the first certificate in a certification chain is supposed\nto be the certificate of an identity).\nIt must correspond to the certificate of root or intermediate CA\nrecognized by the MSP this message belongs to.\nStarting from this certificate, a certification chain is computed\nand bound to the OrganizationUnitIdentifier specified"
+        },
+        "organizationalUnitIdentifier": {
+          "type": "string",
+          "title": "OrganizationUnitIdentifier defines the organizational unit under the\nMSP identified with MSPIdentifier"
+        }
+      },
+      "description": "FabricOUIdentifier represents an organizational unit and\nits related chain of trust identifier."
+    },
+    "mspKeyInfo": {
+      "type": "object",
+      "properties": {
+        "keyIdentifier": {
+          "type": "string",
+          "title": "Identifier of the key inside the default keystore; this for\nthe case of Software BCCSP as well as the HSM BCCSP would be\nthe SKI of the key"
+        },
+        "keyMaterial": {
+          "type": "string",
+          "format": "byte",
+          "title": "KeyMaterial (optional) for the key to be imported; this is\nproperly encoded key bytes, prefixed by the type of the key"
+        }
+      },
+      "title": "KeyInfo represents a (secret) key that is either already stored\nin the bccsp/keystore or key material to be imported to the\nbccsp key-store. In later versions it may contain also a\nkeystore identifier"
+    },
+    "mspSigningIdentityInfo": {
+      "type": "object",
+      "properties": {
+        "publicSigner": {
+          "type": "string",
+          "format": "byte",
+          "title": "PublicSigner carries the public information of the signing\nidentity. For an X.509 provider this would be represented by\nan X.509 certificate"
+        },
+        "privateSigner": {
+          "$ref": "#/definitions/mspKeyInfo",
+          "title": "PrivateSigner denotes a reference to the private key of the\npeer's signing identity"
+        }
+      },
+      "title": "SigningIdentityInfo represents the configuration information\nrelated to the signing identity the peer is to use for generating\nendorsements"
+    },
+    "protoChaincodeInstallExternalRequest": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "External chaincode type"
+        },
+        "label": {
+          "type": "string",
+          "description": "Label for chaincode"
+        },
+        "baseDomain": {
+          "type": "string",
+          "description": "Base domain for"
+        }
+      }
+    },
+    "protoChaincodeInstallRequest": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "URL link to package with chaincode"
+        },
+        "authHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "URL link to package with chaincode"
+        }
+      },
+      "description": "Request for downloading and installation of chaincodes",
+      "title": "InstallChaincodeRequest",
+      "required": [
+        "source"
+      ]
+    },
+    "protoChaincodeInstallResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoChaincodeInstallResponseResult"
+          },
+          "description": "Result of installation for each peer"
+        }
+      }
+    },
+    "protoChaincodeInstallResponseResult": {
+      "type": "object",
+      "properties": {
+        "peer": {
+          "type": "string",
+          "description": "Address of affected peer"
+        },
+        "existed": {
+          "type": "boolean",
+          "description": "Flag of existence chaincode on peer, true if already installed"
+        },
+        "err": {
+          "type": "string",
+          "description": "Occurred error with description if happened"
+        },
+        "label": {
+          "type": "string",
+          "description": "Label of installed chaincode package"
+        }
+      }
+    },
+    "protoChaincodeInstalledResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoChaincodeInstalledResponseResult"
+          }
+        }
+      }
+    },
+    "protoChaincodeInstalledResponseResult": {
+      "type": "object",
+      "properties": {
+        "packageId": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "peers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "protoChannelJoinRequest": {
+      "type": "object",
+      "properties": {
+        "channelName": {
+          "type": "string"
+        },
+        "orderer": {
+          "$ref": "#/definitions/protoChannelJoinRequestOrderer"
+        }
+      },
+      "title": "Request and response for channel join method"
+    },
+    "protoChannelJoinRequestOrderer": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "protoChannelJoinResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoChannelJoinResponsePeerResult"
+          }
+        }
+      }
+    },
+    "protoChannelJoinResponsePeerResult": {
+      "type": "object",
+      "properties": {
+        "peer": {
+          "type": "string"
+        },
+        "existed": {
+          "type": "boolean"
+        },
+        "err": {
+          "type": "string"
+        }
+      }
+    },
+    "protoChannelJoinedResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoChannelJoinedResponseResult"
+          }
+        }
+      }
+    },
+    "protoChannelJoinedResponsePeerResult": {
+      "type": "object",
+      "properties": {
+        "peer": {
+          "type": "string"
+        },
+        "blockNumber": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "blockHash": {
+          "type": "string",
+          "format": "byte"
+        },
+        "prevBlockHash": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "protoChannelJoinedResponseResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "peers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoChannelJoinedResponsePeerResult"
+          }
+        }
+      }
+    },
+    "protoConfigAnchorListResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protosAnchorPeer"
+          }
+        }
+      }
+    },
+    "protoConfigAnchorModifyResponse": {
+      "type": "object",
+      "properties": {
+        "new": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protosAnchorPeer"
+          }
+        },
+        "existed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protosAnchorPeer"
+          }
+        },
+        "deleted": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protosAnchorPeer"
+          }
+        }
+      }
+    },
+    "protoConfigOrderingListResponse": {
+      "type": "object",
+      "properties": {
+        "orderers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoOrderer"
+          }
+        },
+        "consensus": {
+          "$ref": "#/definitions/protoConsensusType"
+        }
+      }
+    },
+    "protoConsensusType": {
+      "type": "string",
+      "enum": [
+        "CONSENSUS_TYPE_UNSPECIFIED",
+        "CONSENSUS_TYPE_RAFT",
+        "CONSENSUS_TYPE_BFT"
+      ],
+      "default": "CONSENSUS_TYPE_UNSPECIFIED"
+    },
+    "protoDiscoveryConfigResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/discoveryConfigResult"
+        }
+      }
+    },
+    "protoDiscoveryEndorsersResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoDiscoveryPeer"
+          }
+        }
+      }
+    },
+    "protoDiscoveryPeer": {
+      "type": "object",
+      "properties": {
+        "mspId": {
+          "type": "string"
+        },
+        "blockNumber": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "cert": {
+          "$ref": "#/definitions/DiscoveryPeerCertificate"
+        },
+        "chaincodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "protoDiscoveryPeersResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoDiscoveryPeer"
+          }
+        }
+      }
+    },
+    "protoErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "protoLifecycleApproveForMyOrgRequest": {
+      "type": "object",
+      "properties": {
+        "sequence": {
+          "type": "string",
+          "format": "int64"
+        },
+        "channelName": {
+          "type": "string"
+        },
+        "chaincodeName": {
+          "type": "string"
+        },
+        "chaincodeLabel": {
+          "type": "string"
+        },
+        "policy": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "initRequired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "protoLifecycleApprovedResponse": {
+      "type": "object",
+      "properties": {
+        "chaincode": {
+          "$ref": "#/definitions/protoLifecycleChaincode"
+        },
+        "packageId": {
+          "type": "string"
+        }
+      }
+    },
+    "protoLifecycleChaincode": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "sequence": {
+          "type": "string",
+          "format": "int64"
+        },
+        "version": {
+          "type": "string"
+        },
+        "initRequired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "protoLifecycleCheckCommitReadinessRequest": {
+      "type": "object",
+      "properties": {
+        "sequence": {
+          "type": "string",
+          "format": "int64"
+        },
+        "channelName": {
+          "type": "string"
+        },
+        "chaincodeName": {
+          "type": "string"
+        },
+        "policy": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "initRequired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "protoLifecycleCheckCommitReadinessResponse": {
+      "type": "object",
+      "properties": {
+        "approvals": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "protoLifecycleCommitRequest": {
+      "type": "object",
+      "properties": {
+        "sequence": {
+          "type": "string",
+          "format": "int64"
+        },
+        "channelName": {
+          "type": "string"
+        },
+        "chaincodeName": {
+          "type": "string"
+        },
+        "policy": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "initRequired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "protoLifecycleFullRequest": {
+      "type": "object",
+      "properties": {
+        "channelName": {
+          "type": "string"
+        },
+        "chaincodeName": {
+          "type": "string"
+        },
+        "chaincodeLabel": {
+          "type": "string"
+        },
+        "policy": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "initArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "initRequired": {
+          "type": "boolean"
+        },
+        "commitForce": {
+          "type": "boolean"
+        }
+      }
+    },
+    "protoLifecycleFullResponse": {
+      "type": "object",
+      "properties": {
+        "committed": {
+          "type": "boolean"
+        },
+        "approvals": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "protoLifecycleInitRequest": {
+      "type": "object",
+      "properties": {
+        "channelName": {
+          "type": "string"
+        },
+        "chaincodeName": {
+          "type": "string"
+        },
+        "initArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "protoLifecycleStatusResponse": {
+      "type": "object",
+      "properties": {
+        "chaincodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoLifecycleChaincode"
+          }
+        }
+      }
+    },
+    "protoOrderer": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cert": {
+          "type": "string",
+          "format": "byte"
+        },
+        "caCerts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "mspId": {
+          "type": "string"
+        },
+        "identity": {
+          "type": "string",
+          "format": "byte"
+        },
+        "consenterId": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "protosAnchorPeer": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string",
+          "title": "DNS host name of the anchor peer"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port number"
+        }
+      },
+      "description": "AnchorPeer message structure which provides information about anchor peer, it includes host name,\nport number and peer certificate."
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "description": "Authentication token, prefixed by Bearer: Bearer \u003ctoken\u003e",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}

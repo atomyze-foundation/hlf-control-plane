@@ -1,0 +1,314 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "github.com/atomyze-foundation/hlf-control-plane/proto";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "peer/lifecycle/lifecycle.proto";
+import "channel.proto";
+import "chaincode.proto";
+import "lifecycle.proto";
+import "config.proto";
+import "discovery.proto";
+
+message ErrorResponse {
+  string error = 1;
+}
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Hlf Control Plane";
+    version: "1.0";
+    description: "";
+    license: {
+      name: "[Default license](LICENSE)";
+    };
+  };
+  tags: [];
+  schemes: HTTP;
+  consumes: "application/json";
+  produces: "application/json";
+  responses: {
+    key: "500"
+    value: {
+      description: "Internal server error"
+      schema:{
+        json_schema:{
+          ref: ".proto.ErrorResponse"
+        }
+      }
+    }
+  }
+  security_definitions: {
+    security: {
+      key: "bearer"
+      value: {
+        type: TYPE_API_KEY
+        in: IN_HEADER
+        name: "Authorization"
+        description: "Authentication token, prefixed by Bearer: Bearer <token>"
+      }
+    }
+  }
+  security: {
+    security_requirement: {
+      key: "bearer"
+    }
+  }
+};
+
+service ChaincodeService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "";
+  };
+
+  rpc ChaincodeInstall(ChaincodeInstallRequest) returns (ChaincodeInstallResponse){
+    option (google.api.http) = {
+      post: "/v1/chaincode/install"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Installation of chaincode package";
+      operation_id: "chaincodeInstall";
+      tags: "Chaincode";
+    };
+  }
+
+  rpc ChaincodeInstallExternal(ChaincodeInstallExternalRequest) returns (ChaincodeInstallResponse) {
+    option (google.api.http) = {
+      post: "/v1/chaincode/install-external"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Installation of external chaincode package";
+      operation_id: "chaincodeInstallExternal";
+      tags: "Chaincode";
+    };
+  }
+
+  rpc ChaincodeInstalled(google.protobuf.Empty) returns (ChaincodeInstalledResponse){//nolint
+    option (google.api.http) = {
+      get: "/v1/chaincode/installed"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Get list of installed chaincodes";
+      operation_id: "chaincodeInstalledList";
+      tags: "Chaincode";
+    };
+  }
+
+  rpc ChannelJoined(google.protobuf.Empty) returns(ChannelJoinedResponse){
+    option (google.api.http) = {
+      get: "/v1/channel/joined"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Get list of joined channels";
+      operation_id: "channelsList";
+      tags: "Channels";
+    };
+  }
+
+  rpc ChannelJoin(ChannelJoinRequest) returns(ChannelJoinResponse) {
+    option (google.api.http) = {
+      post: "/v1/channel/join"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Join channel by fetching genesis block from orderer";
+      operation_id: "channelJoin";
+      tags: "Channels";
+    };
+  }
+
+  rpc LifecycleStatus(LifecycleStatusRequest) returns(LifecycleStatusResponse){
+    option (google.api.http) = {
+      get: "/v1/lifecycle/{channel_name}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      operation_id: "lifecycleStatus";
+      summary: "Get current committed chaincodes on channel",
+      tags: "Lifecycle";
+    };
+  }
+
+  rpc LifecycleApproved(LifecycleApprovedRequest) returns(LifecycleApprovedResponse) {
+    option (google.api.http) = {
+      get: "/v1/lifecycle/{channel_name}/approved/{chaincode_name}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      operation_id: "lifecycleApproved";
+      summary: "Get current approved definition of certain chaincode on channel",
+      tags: "Lifecycle";
+    };
+  }
+
+  rpc LifecycleCheckCommitReadiness(LifecycleCheckCommitReadinessRequest) returns(LifecycleCheckCommitReadinessResponse) {
+    option (google.api.http) = {
+      post: "/v1/lifecycle/check-commit-readiness"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      operation_id: "lifecycleCheckCommitReadiness";
+      summary: "Get a map of orgs to their approval (true/false) for the definition supplied as args of certain chaincode on channel",
+      tags: "Lifecycle";
+    };
+  }
+
+  rpc LifecycleFull(LifecycleFullRequest) returns (LifecycleFullResponse){
+    option (google.api.http) = {
+      post: "/v1/lifecycle/full"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Approve and commit chaincode on channel";
+      operation_id: "lifecycleFull";
+      tags: "Lifecycle";
+    };
+  }
+
+  rpc LifecycleApproveForMyOrg(LifecycleApproveForMyOrgRequest) returns (google.protobuf.Empty){
+    option (google.api.http) = {
+      post: "/v1/lifecycle/approve-for-my-org"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Approve for my org chaincode on channel";
+      operation_id: "lifecycleApproveForMyOrg";
+      tags: "Lifecycle";
+    };
+  }
+
+  rpc LifecycleCommit(LifecycleCommitRequest) returns (google.protobuf.Empty){
+    option (google.api.http) = {
+      post: "/v1/lifecycle/commit"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Commit for chaincode on channel";
+      operation_id: "lifecycleCommit";
+      tags: "Lifecycle";
+    };
+  }
+
+  rpc LifecycleInit(LifecycleInitRequest) returns (google.protobuf.Empty){
+    option (google.api.http) = {
+      post: "/v1/lifecycle/init"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Init for chaincode on channel";
+      operation_id: "lifecycleInit";
+      tags: "Lifecycle";
+    };
+  }
+
+  rpc ConfigAnchorList(ConfigAnchorListRequest) returns(ConfigAnchorListResponse) {
+    option (google.api.http) = {
+      get: "/v1/config/{channel_name}/anchor"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Get list of anchor peers on channel";
+      operation_id: "anchorPeerList";
+      tags: ["Configuration"];
+    };
+  }
+
+  rpc ConfigAnchorModify(ConfigAnchorModifyRequest) returns(ConfigAnchorModifyResponse){
+    option (google.api.http) = {
+      put: "/v1/config/{channel_name}/anchor"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Modify list of anchor peers on channel";
+      operation_id: "anchorPeerModify";
+      tags: ["Configuration"];
+    };
+  }
+
+  rpc ConfigOrderingList(ConfigOrderingListRequest) returns(ConfigOrderingListResponse) {
+    option (google.api.http) = {
+      get: "/v1/config/{channel_name}/ordering"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Get ordering config of specified channel";
+      operation_id: "orderingGetConfig";
+      tags: ["Configuration"];
+    };
+  }
+
+  rpc ConfigOrderingAdd(ConfigOrderingAddRequest) returns(google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/config/{channel_name}/ordering"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Add new orderer in channel";
+      operation_id: "orderingConfigAdd";
+      tags: ["Configuration"];
+    };
+  }
+
+  rpc ConfigOrderingUpdate(ConfigOrderingUpdateRequest) returns(google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/v1/config/{channel_name}/ordering"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Update current orderer in channel";
+      operation_id: "orderingConfigUpdate";
+      tags: ["Configuration"];
+    };
+  }
+
+  rpc ConfigOrderingDelete(ConfigOrderingDeleteRequest) returns(google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/config/{channel_name}/ordering"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Delete orderer from channel";
+      operation_id: "orderingConfigDelete";
+      tags: ["Configuration"];
+    };
+  }
+
+
+
+  rpc DiscoveryEndorsers(DiscoveryEndorsersRequest) returns(DiscoveryEndorsersResponse) {
+    option (google.api.http) = {
+      post: "/v1/discovery/{channel_name}/endorsers"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Get current endorsers of chaincode on channel";
+      operation_id: "discoveryEndorsers";
+      tags: "Discovery";
+    };
+  }
+
+  rpc DiscoveryPeers(DiscoveryPeersRequest) returns(DiscoveryPeersResponse) {
+    option (google.api.http) = {
+      post: "/v1/discovery/{channel_name}/peers"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Get current peers of channel";
+      operation_id: "discoveryPeers";
+      tags: "Discovery";
+    };
+  }
+
+  rpc DiscoveryConfig(DiscoveryConfigRequest) returns(DiscoveryConfigResponse) {
+    option (google.api.http) = {
+      post: "/v1/discovery/{channel_name}/config"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Get config of channel";
+      operation_id: "discoveryConfig";
+      tags: "Discovery";
+    };
+  }
+}

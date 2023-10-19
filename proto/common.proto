@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "github.com/atomyze-foundation/hlf-control-plane/proto";
+
+message Orderer {
+  string host = 1;
+  uint32 port = 2;
+  bytes cert = 3;
+  repeated bytes ca_certs = 4;
+  string msp_id = 5;
+  bytes identity = 6;
+  uint64 consenter_id = 7;
+}
+
+enum ConsensusType {
+  CONSENSUS_TYPE_UNSPECIFIED = 0;
+  CONSENSUS_TYPE_RAFT = 1;
+  CONSENSUS_TYPE_BFT = 2;
+}

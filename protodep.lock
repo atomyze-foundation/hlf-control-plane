@@ -1,0 +1,33 @@
+proto_outdir = "./vendor_proto"
+
+[[dependencies]]
+  target = "github.com/hyperledger/fabric-protos"
+  subgroup = ""
+  revision = "f4e976cd8eaafeed15f9764a80b7a841cf8d2f6f"
+  branch = "main"
+  path = ""
+  protocol = ""
+
+[[dependencies]]
+  target = "github.com/googleapis/googleapis"
+  subgroup = ""
+  revision = "dd546bf83f7aa6dd24e17d3e83d9a397a6dd680c"
+  branch = "master"
+  path = ""
+  protocol = ""
+
+[[dependencies]]
+  target = "github.com/grpc-ecosystem/grpc-gateway"
+  subgroup = ""
+  revision = "4f8ee0904ad515e35a50c9d1ccfcb440fa5da95f"
+  branch = ""
+  path = ""
+  protocol = ""
+
+[[dependencies]]
+  target = "github.com/protocolbuffers/protobuf/src/google"
+  subgroup = ""
+  revision = "ee1355459c9ce7ffe264bc40cfdc7b7623d37e99"
+  branch = ""
+  path = "google"
+  protocol = ""

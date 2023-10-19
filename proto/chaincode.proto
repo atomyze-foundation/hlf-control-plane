@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "github.com/atomyze-foundation/hlf-control-plane/proto";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+// Request and response for chaincode installation method
+message ChaincodeInstallRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "InstallChaincodeRequest"
+      description: "Request for downloading and installation of chaincodes"
+      required: ["source"]
+    }
+  };
+  string source = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "URL link to package with chaincode"}];
+  map<string, string> auth_headers = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "URL link to package with chaincode"}];
+}
+
+message ChaincodeInstallResponse {
+  message Result {
+    string peer = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Address of affected peer"}];
+    oneof result {
+      bool existed = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Flag of existence chaincode on peer, true if already installed"}];
+      string err = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Occurred error with description if happened"}];
+    }
+    string label = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Label of installed chaincode package"}];
+  }
+  repeated Result result = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Result of installation for each peer"}];
+}
+
+message ChaincodeInstallExternalRequest {
+  string type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "External chaincode type"}];
+  string label = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Label for chaincode"}];
+
+  string base_domain = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Base domain for"}];
+}
+
+message ChaincodeInstalledResponse{
+  message Result {
+    string package_id = 1;
+    string label = 2;
+    repeated string peers = 3;
+  }
+  repeated Result result = 1;
+}

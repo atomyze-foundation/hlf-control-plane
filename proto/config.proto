@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "github.com/atomyze-foundation/hlf-control-plane/proto";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "peer/configuration.proto";
+import "common.proto";
+
+// Request and response for anchor peer list method
+message ConfigAnchorListRequest {
+  string channel_name = 1;
+}
+
+message ConfigAnchorListResponse {
+  repeated protos.AnchorPeer result = 1;
+}
+
+// Request and response for anchor peer list modify method
+message ConfigAnchorModifyRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ConfigAnchorModifyRequest"
+      description: "Configuration anchor list request"
+      required: ["channel_name", "peers"]
+    }
+  };
+  string channel_name = 1;
+  Orderer orderer = 2;
+  repeated protos.AnchorPeer peers = 3;
+}
+
+message ConfigAnchorModifyResponse {
+  repeated protos.AnchorPeer new = 1;
+  repeated protos.AnchorPeer existed = 2;
+  repeated protos.AnchorPeer deleted = 3;
+}
+
+// Request and response for get ordering config of channel
+message ConfigOrderingListRequest {
+  string channel_name = 1;
+}
+
+message ConfigOrderingListResponse {
+  repeated Orderer orderers = 1;
+  ConsensusType consensus = 2;
+}
+
+message ConfigOrderingAddRequest {
+  string channel_name = 1;
+  Orderer orderer = 2;
+}
+
+// Request and response for ordering modify method
+message ConfigOrderingUpdateRequest {
+  string channel_name = 1;
+  Orderer orderer = 2;
+}
+
+// Request and response for ordering deletion method
+message ConfigOrderingDeleteRequest {
+  string channel_name = 1;
+  Orderer orderer = 2;
+}

@@ -1,0 +1,4 @@
+!.gitignore
+embed.go
+*.json
+!plane.swagger.json
