@@ -28,7 +28,7 @@ func (s *srv) ConfigAnchorModify(ctx context.Context, req *proto.ConfigAnchorMod
 		logger.Error("get endorser failed", zap.Error(err))
 		return nil, status.Errorf(codes.Internal, "get endorser failed: %v", err)
 	}
-	// TODO get channel config from orderer
+
 	/*if req.Orderer != nil {
 		s.ordPool.Get(&orderer.Orderer{
 			Host:         req.Orderer.Host,
