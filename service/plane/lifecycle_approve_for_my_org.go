@@ -3,13 +3,13 @@ package plane
 import (
 	"context"
 
-	"github.com/golang/protobuf/proto" //nolint:staticcheck
-	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/policydsl"
 	"github.com/atomyze-foundation/hlf-control-plane/pkg/util"
 	pb "github.com/atomyze-foundation/hlf-control-plane/proto"
 	"github.com/atomyze-foundation/hlf-control-plane/system/cscc"
 	"github.com/atomyze-foundation/hlf-control-plane/system/lifecycle"
+	"github.com/golang/protobuf/proto" //nolint:staticcheck
+	"github.com/hyperledger/fabric-protos-go/peer"
+	"github.com/hyperledger/fabric/common/policydsl"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

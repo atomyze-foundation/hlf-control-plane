@@ -3,9 +3,9 @@ package plane
 import (
 	"context"
 
-	lifecycle2 "github.com/hyperledger/fabric-protos-go/peer/lifecycle"
 	"github.com/atomyze-foundation/hlf-control-plane/proto"
 	"github.com/atomyze-foundation/hlf-control-plane/system/lifecycle"
+	lifecycle2 "github.com/hyperledger/fabric-protos-go/peer/lifecycle"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

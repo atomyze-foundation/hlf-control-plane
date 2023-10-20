@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"sort"
 
+	"github.com/atomyze-foundation/hlf-control-plane/pkg/peer"
+	pb "github.com/atomyze-foundation/hlf-control-plane/proto"
 	"github.com/golang/protobuf/proto" //nolint:staticcheck
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/msp"
@@ -12,8 +14,6 @@ import (
 	"github.com/hyperledger/fabric-protos-go/orderer/smartbft"
 	pp "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/atomyze-foundation/hlf-control-plane/pkg/peer"
-	pb "github.com/atomyze-foundation/hlf-control-plane/proto"
 	"golang.org/x/exp/slices"
 )
 

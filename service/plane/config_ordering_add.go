@@ -4,15 +4,15 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/atomyze-foundation/hlf-control-plane/pkg/util"
+	pb "github.com/atomyze-foundation/hlf-control-plane/proto"
+	"github.com/atomyze-foundation/hlf-control-plane/system/cscc"
 	"github.com/golang/protobuf/proto" //nolint:staticcheck
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
 	"github.com/hyperledger/fabric-protos-go/orderer/smartbft"
 	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/atomyze-foundation/hlf-control-plane/pkg/util"
-	pb "github.com/atomyze-foundation/hlf-control-plane/proto"
-	"github.com/atomyze-foundation/hlf-control-plane/system/cscc"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

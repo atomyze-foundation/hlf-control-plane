@@ -4,13 +4,13 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/atomyze-foundation/hlf-control-plane/pkg/util"
 	"github.com/golang/protobuf/proto" //nolint:staticcheck
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	lb "github.com/hyperledger/fabric-protos-go/peer/lifecycle"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/pkg/errors"
-	"github.com/atomyze-foundation/hlf-control-plane/pkg/util"
 )
 
 func (c *cli) QueryInstalled(ctx context.Context) ([]InstalledChaincode, error) {

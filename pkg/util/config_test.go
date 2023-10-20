@@ -7,12 +7,12 @@ import (
 	"runtime"
 	"testing"
 
+	pb "github.com/atomyze-foundation/hlf-control-plane/proto"
 	"github.com/golang/protobuf/proto" //nolint:staticcheck
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric/common/configtx"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/stretchr/testify/assert"
-	pb "github.com/atomyze-foundation/hlf-control-plane/proto"
 )
 
 func TestGetOrdererConfig(t *testing.T) {

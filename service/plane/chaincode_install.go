@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/core/chaincode/persistence"
 	pb "github.com/atomyze-foundation/hlf-control-plane/proto"
 	"github.com/atomyze-foundation/hlf-control-plane/system/lifecycle"
+	"github.com/hyperledger/fabric-protos-go/peer"
+	"github.com/hyperledger/fabric/core/chaincode/persistence"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

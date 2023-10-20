@@ -7,10 +7,10 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/atomyze-foundation/hlf-control-plane/pkg/matcher"
 	"github.com/hyperledger/fabric-protos-go/discovery"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	cutil "github.com/hyperledger/fabric/common/util"
-	"github.com/atomyze-foundation/hlf-control-plane/pkg/matcher"
 	"go.uber.org/multierr"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"

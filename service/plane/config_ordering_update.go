@@ -3,10 +3,10 @@ package plane
 import (
 	"context"
 
-	"github.com/imdario/mergo"
 	"github.com/atomyze-foundation/hlf-control-plane/pkg/util"
 	pb "github.com/atomyze-foundation/hlf-control-plane/proto"
 	"github.com/atomyze-foundation/hlf-control-plane/system/cscc"
+	"github.com/imdario/mergo"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

@@ -13,9 +13,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/felixge/httpsnoop"
-	"github.com/flowchartsman/swaggerui"
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/atomyze-foundation/hlf-control-plane/pkg/config"
 	"github.com/atomyze-foundation/hlf-control-plane/pkg/discovery"
 	"github.com/atomyze-foundation/hlf-control-plane/pkg/health"
@@ -25,6 +22,9 @@ import (
 	"github.com/atomyze-foundation/hlf-control-plane/proto"
 	"github.com/atomyze-foundation/hlf-control-plane/service/plane"
 	srvMw "github.com/atomyze-foundation/hlf-control-plane/service/plane/middleware"
+	"github.com/felixge/httpsnoop"
+	"github.com/flowchartsman/swaggerui"
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"go.uber.org/zap"
 	"golang.org/x/sync/errgroup"
 	"google.golang.org/grpc"
@@ -32,6 +32,7 @@ import (
 	"google.golang.org/grpc/health/grpc_health_v1"
 )
 
+// AppInfoVer is set by build flags
 var AppInfoVer string
 
 var confFlag = flag.String("config", "config.yaml", "path to configuration file")

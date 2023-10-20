@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"sync"
 
-	ordPb "github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/atomyze-foundation/hlf-control-plane/pkg/matcher"
+	ordPb "github.com/hyperledger/fabric-protos-go/orderer"
 	"go.uber.org/multierr"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"

@@ -1,12 +1,12 @@
 package plane
 
 import (
-	"github.com/hyperledger/fabric/protoutil"
 	sd "github.com/atomyze-foundation/hlf-control-plane/pkg/delivery"
 	"github.com/atomyze-foundation/hlf-control-plane/pkg/discovery"
 	"github.com/atomyze-foundation/hlf-control-plane/pkg/orderer"
 	"github.com/atomyze-foundation/hlf-control-plane/pkg/peer"
 	"github.com/atomyze-foundation/hlf-control-plane/proto"
+	"github.com/hyperledger/fabric/protoutil"
 	"go.uber.org/zap"
 )
 

@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"sort"
 
-	pp "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/atomyze-foundation/hlf-control-plane/pkg/peer"
 	pb "github.com/atomyze-foundation/hlf-control-plane/proto"
 	"github.com/atomyze-foundation/hlf-control-plane/system/cscc"
 	"github.com/atomyze-foundation/hlf-control-plane/system/qscc"
+	pp "github.com/hyperledger/fabric-protos-go/peer"
 	"go.uber.org/zap"
 	"golang.org/x/sync/errgroup"
 	"google.golang.org/protobuf/types/known/emptypb"

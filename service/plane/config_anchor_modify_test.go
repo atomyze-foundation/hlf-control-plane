@@ -3,9 +3,9 @@ package plane
 import (
 	"testing"
 
+	"github.com/atomyze-foundation/hlf-control-plane/proto"
 	"github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/stretchr/testify/assert"
-	"github.com/atomyze-foundation/hlf-control-plane/proto"
 )
 
 func Test_srv_getAnchorPerModifyStats(t *testing.T) {

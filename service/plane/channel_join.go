@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/atomyze-foundation/hlf-control-plane/pkg/orderer"
 	"github.com/atomyze-foundation/hlf-control-plane/pkg/util"
 	pb "github.com/atomyze-foundation/hlf-control-plane/proto"
 	"github.com/atomyze-foundation/hlf-control-plane/system/cscc"
+	"github.com/hyperledger/fabric-protos-go/common"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
