@@ -5,17 +5,23 @@ FROM $BUILDER_IMAGE:$BUILDER_VERSION AS builder
 
 WORKDIR /go/src/app
 
-ENV GOPRIVATE=github.com
-ARG REGISTRY_NETRC="machine github.com login REGISTRY_USERNAME password REGISTRY_PASSWORD"
-ARG APP_VERSION=unknown
+ENV GOPRIVATE="github.com/atomyze-foundation/*"
+ARG NETRC="machine github.com login REGISTRY_USERNAME password REGISTRY_PASSWORD"
+ARG VERSION=unknown
 
-RUN echo "$REGISTRY_NETRC" > ~/.netrc
+RUN echo "$NETRC" > ~/.netrc
 
 COPY go.mod go.sum ./
-RUN apt-get update && apt-get install --no-install-recommends -y git=1:2.* upx-ucl=3.* && go mod download
+RUN \
+    apt-get update && apt-get install --no-install-recommends -y \
+    git=1:2.* \
+    upx-ucl=3.*
+RUN go mod download
 
 COPY . .
-RUN go build -trimpath -tags pkcs11 -v -ldflags="-X 'main.AppInfoVer=$APP_VERSION'" -o /go/bin/app && strip /go/bin/app && upx -5 -q /go/bin/app
+RUN go build -trimpath -tags pkcs11 -v -ldflags="-X 'main.AppInfoVer=$VERSION'" -o /go/bin/hlf-control-plane && \
+    strip /go/bin/hlf-control-plane && \
+    upx -5 -q /go/bin/hlf-control-plane
 
 FROM ubuntu:20.04
 
@@ -66,7 +72,7 @@ ENV SOFTHSM2_CONF="/etc/softhsm/softhsm2.conf"
 VOLUME /etc/control-plane
 WORKDIR /etc/control-plane
 
-COPY --chown=65534:65534 --from=builder /go/bin/app /app
+COPY --chown=65534:65534 --from=builder /go/bin/hlf-control-plane /hlf-control-plane
 USER 65534
 
-ENTRYPOINT [ "/app" ]
+ENTRYPOINT [ "/hlf-control-plane" ]
