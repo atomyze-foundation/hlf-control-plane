@@ -15,7 +15,9 @@ COPY go.mod go.sum ./
 RUN \
     apt-get update && apt-get install --no-install-recommends -y \
     git=1:2.* \
-    upx-ucl=3.*
+    upx-ucl=3.* && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
 RUN go mod download
 
 COPY . .
@@ -43,12 +45,14 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     libcurl4=${CURL_VERSION} \
     libusb-1.0-0=${LIBUSB_VERSION} \
     libpcsclite1=${LIBPCSCLITE_VERSION} \
-    libedit2=${LIBEDIT_VERSION}
+    libedit2=${LIBEDIT_VERSION} && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # install yubihsm sdk
 WORKDIR /tmp
 RUN curl -LO https://developers.yubico.com/YubiHSM2/Releases/yubihsm2-sdk-${YUBIHSM_VERSION}-amd64.tar.gz && \
     tar xzf yubihsm2-sdk-${YUBIHSM_VERSION}-amd64.tar.gz
+
 # set up yubihsm libs
 WORKDIR /tmp/yubihsm2-sdk
 RUN dpkg -i libyubihsm-http1_${YUBIHSM_PACKAGE_VERSION}_amd64.deb \
@@ -63,7 +67,8 @@ RUN dpkg -i libyubihsm-http1_${YUBIHSM_PACKAGE_VERSION}_amd64.deb \
     yubihsm-pkcs11_${YUBIHSM_PACKAGE_VERSION}_amd64.deb \
     yubihsm-wrap_${YUBIHSM_PACKAGE_VERSION}_amd64.deb \
     yubihsm-shell_${YUBIHSM_PACKAGE_VERSION}_amd64.deb \
-    && rm -rf ../yubihsm2-sdk-${YUBIHSM_VERSION}-amd64.tar.gz ../yubihsm2-sdk
+    && rm -rf ../yubihsm2-sdk-${YUBIHSM_VERSION}-amd64.tar.gz ../yubihsm2-sdk && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # add default hsm variables
 ENV YUBIHSM_PKCS11_CONF="/etc/yubihsm.conf"
