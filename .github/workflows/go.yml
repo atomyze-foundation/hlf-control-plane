@@ -31,12 +31,16 @@ jobs:
     needs:
       - go-qa-l1
     uses: atomyze-foundation/workflows/.github/workflows/go-test--v1.yml@main
+    with:
+      GO_TEST_ARGS: --tags pkcs11
     secrets: inherit
 
   go-qa-l3:
     needs:
       - go-qa-l2
     uses: atomyze-foundation/workflows/.github/workflows/go-static--v1.yml@main
+    with:
+      GO_TEST_ARGS: --tags pkcs11
     secrets: inherit
 
   docker-build-and-push:
