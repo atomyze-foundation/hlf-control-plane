@@ -12,7 +12,7 @@ require (
 	github.com/hyperledger/fabric-protos-go v0.3.0
 	github.com/imdario/mergo v0.3.13
 	github.com/pkg/errors v0.9.1
-	github.com/stretchr/testify v1.8.1
+	github.com/stretchr/testify v1.8.2
 	go.uber.org/config v1.4.0
 	go.uber.org/multierr v1.9.0
 	go.uber.org/zap v1.21.0
@@ -33,8 +33,10 @@ require (
 	github.com/Microsoft/hcsshim v0.11.0 // indirect
 	github.com/Shopify/sarama v1.22.1 // indirect
 	github.com/VictoriaMetrics/fastcache v1.12.1 // indirect
+	github.com/bits-and-blooms/bitset v1.7.0 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
-	github.com/consensys/gnark-crypto v0.6.0 // indirect
+	github.com/consensys/bavard v0.1.13 // indirect
+	github.com/consensys/gnark-crypto v0.11.2 // indirect
 	github.com/containerd/containerd v1.6.18 // indirect
 	github.com/containerd/continuity v0.4.3 // indirect
 	github.com/creack/pty v1.1.17 // indirect
@@ -57,7 +59,6 @@ require (
 	github.com/hyperledger/fabric-chaincode-go v0.0.0-20201119163726-f8ef75b17719 // indirect
 	github.com/hyperledger/fabric-lib-go v1.0.0 // indirect
 	github.com/klauspost/compress v1.17.2 // indirect
-	github.com/kr/pretty v0.3.1 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/miekg/pkcs11 v1.1.1 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
@@ -73,6 +74,7 @@ require (
 	github.com/pierrec/lz4 v2.6.0+incompatible // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
+	github.com/rogpeppe/go-internal v1.9.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/spf13/afero v1.9.4 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
@@ -95,11 +97,11 @@ require (
 	golang.org/x/tools v0.14.0 // indirect
 	google.golang.org/genproto v0.0.0-20231012201019-e917dd12ba7a // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20231016165738-49dd2c1f3d0b // indirect
-	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gotest.tools/v3 v3.3.0 // indirect
+	rsc.io/tmplfunc v0.0.3 // indirect
 )
 
 replace github.com/hyperledger/fabric-protos-go v0.3.0 => github.com/scientificideas/fabric-protos-go v0.0.0-20221126151030-78861c4f6e73
