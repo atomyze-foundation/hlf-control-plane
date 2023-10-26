@@ -8,6 +8,7 @@ import (
 	"go.uber.org/config"
 )
 
+// Config defines the configuration structure for your hlf-control-plane app.
 type Config struct {
 	LogLevel    string          `yaml:"logLevel"`
 	AccessToken string          `yaml:"accessToken"`

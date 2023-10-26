@@ -13,6 +13,8 @@ const (
 	authHeader = "authorization"
 )
 
+// AuthenticationInterceptor is a gRPC unary server interceptor that checks
+// the authenticity of incoming requests based on a provided token.
 func AuthenticationInterceptor(token string) grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 		// skip auth check on service healthcheck

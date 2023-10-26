@@ -12,12 +12,16 @@ import (
 
 const dummyMsg = "dummyMsg"
 
+// Identity represents the identity configuration.
 type Identity struct {
 	Cert  string              `yaml:"cert"`
 	Key   string              `yaml:"key"`
 	BCCSP factory.FactoryOpts `yaml:"bccsp"`
 }
 
+// Load loads the identity and returns a signer for the provided MSP ID. It can load
+// either a certificate-based identity or a PKCS11-based identity, depending on the presence
+// of the private key information.
 func (i *Identity) Load(log *zap.Logger, mspID string) (protoutil.Signer, error) {
 	var (
 		id  protoutil.Signer

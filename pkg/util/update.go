@@ -212,6 +212,8 @@ func computeGroupUpdate(original, updated *cb.ConfigGroup) (readSet, writeSet *c
 		}, true
 }
 
+// Compute computes a configuration update by comparing an original configuration
+// with an updated configuration.
 func Compute(original, updated *cb.Config) (*cb.ConfigUpdate, error) {
 	if original.ChannelGroup == nil {
 		return nil, fmt.Errorf("no channel group included for original config")

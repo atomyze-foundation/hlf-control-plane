@@ -150,6 +150,7 @@ func (c *cli) getPeerResponse(peers []*discovery.Peer) ([]*proto.DiscoveryPeer, 
 	return discoveryPeers, nil
 }
 
+// NewClient creates and returns a new client for interacting with a transaction service.
 func NewClient(log *zap.Logger, mspID string, pool peer.Pool, id protoutil.Signer) Client {
 	l := log.Named("discovery")
 

@@ -21,6 +21,8 @@ func (o ordererClient) Broadcast(_ context.Context, _ ...grpc.CallOption) (order
 	return nil, errors.New("broadcast err")
 }
 
+// Deliver initiates a delivery operation to the orderer.
+// This method returns a delivery client and an error.
 func (o ordererClient) Deliver(_ context.Context, _ ...grpc.CallOption) (orderer.AtomicBroadcast_DeliverClient, error) {
 	if o.deliver {
 		return nil, nil
@@ -28,6 +30,7 @@ func (o ordererClient) Deliver(_ context.Context, _ ...grpc.CallOption) (orderer
 	return nil, errors.New("deliver err")
 }
 
+// NewOrdererClient creates and returns a new orderer client for interacting with an orderer service.
 func NewOrdererClient(broadCast, deliver bool) orderer.AtomicBroadcastClient {
 	return &ordererClient{broadCast: broadCast, deliver: deliver}
 }

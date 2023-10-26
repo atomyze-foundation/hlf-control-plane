@@ -7,12 +7,17 @@ import (
 	"os"
 )
 
+// TLSCredentials represents the TLS (Transport Layer Security) credentials configuration
+// for secure communication.
 type TLSCredentials struct {
 	Cert string `yaml:"cert"`
 	Key  string `yaml:"key"`
 	CA   string `yaml:"ca"`
 }
 
+// TLSConfig generates a TLS (Transport Layer Security) configuration using the specified TLS
+// certificate, private key, and Certificate Authority (CA) information.
+// It creates a TLS configuration suitable for secure communication.
 func (c *TLSCredentials) TLSConfig() (*tls.Config, error) {
 	// Load certificate of the CA who signed server's certificate
 	pemServerCA, err := os.ReadFile(c.CA)

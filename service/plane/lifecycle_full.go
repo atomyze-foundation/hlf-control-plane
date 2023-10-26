@@ -604,7 +604,14 @@ func (s *srv) getPeersAndOrderersFromConf(ctx context.Context, endCli pp.Endorse
 	return peers, orderers, consType, nil
 }
 
-func GetEndorsersFromDiscovery(ctx context.Context, peerPool peer.Pool, peersCfg []*peer.Peer, peersDis []*pb.DiscoveryPeer) ([]pp.EndorserClient, error) {
+// GetEndorsersFromDiscovery retrieves a list of endorser clients
+// from a given peer pool based on discovery information.
+func GetEndorsersFromDiscovery(
+	ctx context.Context,
+	peerPool peer.Pool,
+	peersCfg []*peer.Peer,
+	peersDis []*pb.DiscoveryPeer,
+) ([]pp.EndorserClient, error) {
 	peers := make([]*peer.Peer, 0, len(peersDis))
 
 m1:

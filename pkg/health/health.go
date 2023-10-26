@@ -20,6 +20,8 @@ func (s *srv) Watch(_ *grpc_health_v1.HealthCheckRequest, _ grpc_health_v1.Healt
 	return status.Error(codes.Unimplemented, "unimplemented")
 }
 
+// NewSrv creates and returns a new gRPC health server
+// that implements the grpc_health_v1.HealthServer interface.
 func NewSrv() grpc_health_v1.HealthServer {
 	return &srv{}
 }

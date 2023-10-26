@@ -7,6 +7,7 @@ import (
 	"github.com/hyperledger/fabric/protoutil"
 )
 
+// GetTxIDFromEnvelope extracts the transaction ID from a common.Envelope.
 func GetTxIDFromEnvelope(env *common.Envelope) (string, error) {
 	payload, err := protoutil.UnmarshalPayload(env.Payload)
 	if err != nil {

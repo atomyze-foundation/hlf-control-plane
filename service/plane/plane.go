@@ -26,7 +26,17 @@ type srv struct {
 	proto.UnimplementedChaincodeServiceServer
 }
 
-func NewService(mspID string, signer protoutil.Signer, logger *zap.Logger, ordPool orderer.Pool, peerPool peer.Pool, discoveryCli discovery.Client, localPeers []*peer.Peer) proto.ChaincodeServiceServer {
+// NewService creates and returns a new instance of the ChaincodeServiceServer,
+// which serves as a server for interacting with chaincode-related services.
+func NewService(
+	mspID string,
+	signer protoutil.Signer,
+	logger *zap.Logger,
+	ordPool orderer.Pool,
+	peerPool peer.Pool,
+	discoveryCli discovery.Client,
+	localPeers []*peer.Peer,
+) proto.ChaincodeServiceServer {
 	return &srv{
 		mspID:      mspID,
 		localPeers: localPeers,

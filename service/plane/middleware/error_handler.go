@@ -11,6 +11,8 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+// ErrorHandler is a function that returns a runtime.ServeMuxOption
+// for custom error handling in a gRPC-Gateway server.
 func ErrorHandler(logger *zap.Logger) runtime.ServeMuxOption {
 	return runtime.WithErrorHandler(func(ctx context.Context, mux *runtime.ServeMux, marshaler runtime.Marshaler, writer http.ResponseWriter, request *http.Request, err error) {
 		resp := &proto.ErrorResponse{}

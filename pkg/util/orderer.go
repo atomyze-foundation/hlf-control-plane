@@ -12,7 +12,13 @@ import (
 	"go.uber.org/zap"
 )
 
-func GetSeekEnvelope(channelName string, id protoutil.Signer, seekInfo *orderer.SeekInfo, tlsCertHash []byte) (*common.Envelope, error) {
+// GetSeekEnvelope creates a signed envelope containing a seek request for a specific channel.
+func GetSeekEnvelope(
+	channelName string,
+	id protoutil.Signer,
+	seekInfo *orderer.SeekInfo,
+	tlsCertHash []byte,
+) (*common.Envelope, error) {
 	env, err := protoutil.CreateSignedEnvelopeWithTLSBinding(
 		common.HeaderType_DELIVER_SEEK_INFO,
 		channelName,
@@ -29,6 +35,7 @@ func GetSeekEnvelope(channelName string, id protoutil.Signer, seekInfo *orderer.
 	return env, nil
 }
 
+// GetSeekOldestEnvelope creates a seek request envelope for the oldest available block on a channel.
 func GetSeekOldestEnvelope(channelName string, id protoutil.Signer) (*common.Envelope, error) {
 	pos := &orderer.SeekPosition{
 		Type: &orderer.SeekPosition_Oldest{
@@ -42,6 +49,7 @@ func GetSeekOldestEnvelope(channelName string, id protoutil.Signer) (*common.Env
 	}, nil)
 }
 
+// GetSeekNewestEnvelope creates a seek request envelope for the newest available block on a channel.
 func GetSeekNewestEnvelope(channelName string, id protoutil.Signer, tlsCertHash []byte) (*common.Envelope, error) {
 	start := &orderer.SeekPosition{
 		Type: &orderer.SeekPosition_Newest{
@@ -63,6 +71,8 @@ func GetSeekNewestEnvelope(channelName string, id protoutil.Signer, tlsCertHash 
 	}, tlsCertHash)
 }
 
+// GetBlockFromDeliverClient receives a common.Block from an orderer.AtomicBroadcast_DeliverClient
+// and returns it.
 func GetBlockFromDeliverClient(deliverCli orderer.AtomicBroadcast_DeliverClient) (*common.Block, error) {
 	resp, err := deliverCli.Recv()
 	if err != nil {
@@ -83,6 +93,8 @@ func GetBlockFromDeliverClient(deliverCli orderer.AtomicBroadcast_DeliverClient)
 	}
 }
 
+// OrdererBroadcast broadcasts a common.Envelope to multiple orderer nodes and
+// waits for a quorum of successful responses.
 func OrdererBroadcast(ctx context.Context, l *zap.Logger, env *common.Envelope, quorum int, ordererClients ...orderer.AtomicBroadcastClient) error {
 	var cancel context.CancelFunc
 	ctx, cancel = context.WithCancel(ctx)
