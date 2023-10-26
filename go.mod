@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/felixge/httpsnoop v1.0.3
 	github.com/flowchartsman/swaggerui v0.0.0-20221017034628-909ed4f3701b
-	github.com/golang/protobuf v1.5.2
+	github.com/golang/protobuf v1.5.3
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.14.0
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/hyperledger/fabric v1.4.0-rc1.0.20230126155151-c72efd2be272
@@ -18,9 +18,9 @@ require (
 	go.uber.org/zap v1.21.0
 	golang.org/x/exp v0.0.0-20230807204917-050eac23e9de
 	golang.org/x/sync v0.1.0
-	google.golang.org/genproto v0.0.0-20230303212802-e74f57abe488
-	google.golang.org/grpc v1.53.0
-	google.golang.org/protobuf v1.28.1
+	google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1
+	google.golang.org/grpc v1.56.3
+	google.golang.org/protobuf v1.30.0
 )
 
 require (
