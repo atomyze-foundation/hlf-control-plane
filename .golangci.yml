@@ -4,6 +4,8 @@ run:
   concurrency: 4
   timeout: 5m
   tests: false
+  build-tags:
+    - pkcs11
 linters:
   enable:
     - errcheck
@@ -100,4 +102,3 @@ linters-settings:
       - 'G107'
       - 'G402'
       - 'G404'
-
